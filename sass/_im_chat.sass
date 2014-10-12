@@ -1,0 +1,181 @@
+[data-im-container]
+
+  height: 600px
+
+  div.chat // chat header, message list, form;
+    width: 100%
+    height: 100%
+    padding-left: 230px
+    box-sizing: border-box
+
+    .header // page heading, exit-link, page-cover or opponent avatar;
+      position: relative
+
+      h1 // page heading;
+        font-family: 'PT Sans'
+        font-size: 1.1em
+        font-weight: bold
+        text-transform: none
+        display: block
+        padding-left: 20px
+        //text-align: center
+        border-bottom: 1px solid #c0c0c0
+        padding-bottom: 20px
+        width: 85%
+
+      img // chat cover or user avatar;
+        outline: 1px solid #FF3300
+        position: absolute
+        top: 0
+        right: 50px
+        z-index: 100
+
+      .chat-exit // exit link;
+        +replace-text-with-dimensions('pages/im/chat-exit.png')
+        position: absolute
+        right: -10px
+        top: 0
+
+      &:before // decoration circle;
+        +border-radius(12px)
+        content: ''
+        display: block
+        background-color: #c0c0c0
+        width: 12px
+        height: 12px
+        position: absolute
+        bottom: -6px
+        left: -5px
+
+    [data-im-message-list-container]
+      position: relative
+
+      [data-im-message-list]
+        overflow: auto
+        position: absolute
+        word-wrap: break-word
+        bottom: 0
+        margin-top: 60px
+        margin-left: 20px
+        font-size: 0.85em
+        right: 0
+        left: 0
+
+        li // day-separator or message list element;
+          margin: 1em 0 1.5em
+          width: 95%
+          font-family: 'PT Sans'
+
+          &.day // day-separator (today, yesterday, 12.12.12) list element;
+            text-align: center
+            color: #00a651
+            font-style: italic
+            font-size: 90%
+            margin-top: 55px
+
+            &:before, &:after
+              content: '—' // day separator decoration; looks like: — Today —
+
+        .user-from-name // message author name; 
+          color: #00a651
+          display: block
+          font-weight: bold
+
+        time // message creation time;
+          color: #00a651
+          float: right
+          font-size: 0.9em
+
+        .content // message content;
+          line-height: 1.4em
+          width: 85%
+          display: block
+          margin-top: 4px
+
+      img[data-mimic-smile-name][src$='png'] // smiles width;
+        width: 22px
+
+    // new message form;
+    form
+      // text input, smile elements, submit button;
+      [data-im-input-container]
+        position: relative
+        width: 70%
+        display: inline-block
+        vertical-align: middle
+
+        // contenteditable input;
+        div
+          +box-shadow(inset 0px 0px 5px 0px #00a651)
+          +border-radius(5px)
+          height: 3.5em
+          margin-left: 20px
+          margin-bottom: 10px
+          padding: 0.5em 30px 0.5em 0.5em
+          font-size: 85%
+          word-wrap: break-word
+          resize: none
+          border-color: #d5d6d5
+          overflow: hidden
+          &:focus
+            outline: none
+
+        // smiles container toggle button;
+        button
+          +replace-text-with-dimensions('pages/im/chat-smiles.png')
+          position: absolute
+          top: 5px
+          right: 8px
+          cursor: pointer
+          border: none
+          background-color: transparent
+          &:focus
+            outline: none
+
+        // smiles container;
+        ul
+          position: absolute
+          height: 160px
+          width: 300px
+          top: -162px
+          right: 2px
+          border: 2px solid #d3d3d3
+          border-radius: 10px
+          background: white
+          overflow: auto
+
+          &.hidden
+            display: none
+
+          [data-mimic-smile-name]
+            cursor: pointer
+
+      // message submit button;
+      input[type="submit"]
+        @extend %button-im
+        font-size: 0.85em
+        display: inline-block
+        width: 90px
+        vertical-align: top
+        cursor: pointer
+        &:focus
+          outline: none
+
+      // message submit button loading state;
+      &.loading
+        input[type=submit]
+          @extend %hide-text
+          background-image: inline-image('/pages/im/loading.gif')
+
+      // opponent typing state label;
+      [data-im-is-typing-label]
+        display: block
+        visibility: hidden
+        color: #C0C0C0
+        font:
+          size: 85%
+          style: oblique
+        margin-left: 20px
+
+        &.visible
+          visibility: visible

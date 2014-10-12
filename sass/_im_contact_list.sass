@@ -1,0 +1,63 @@
+[data-im-container]
+
+  .contact-list // chat members;
+    +box-shadow(1px 0px #c0c0c0)
+    float: left
+    width: 230px
+    margin: -3% -4%
+    padding: 2%
+    height: 106%
+    position: relative
+
+    h2 // list heading;
+      margin-top: 6%
+      font:
+        family: 'PT Sans'
+        weight: bold
+        size: 1.1em
+
+    ul // members list;
+      margin-top: 2em
+
+      li
+        margin-bottom: 0.5em
+
+      a
+        color: #989291
+        text-decoration: none
+        font-size: 0.8em
+        display: inline-block
+        line-height: 1.4em
+
+        &.online // online users decoration;
+          font-weight: bold
+          color: #00a651
+
+      [data-im-not-viewed-count-label] // not viewed messages label decoration;
+        +border-radius(12px)
+        font-size: 0.85em
+        border: 1px solid
+        color: #FF3300
+        padding: 1px 5px
+        vertical-align: top
+        position: relative
+        top: 3px
+        left: 0px
+
+      [data-im-not-viewed-count="0"] [data-im-not-viewed-count-label]
+        display: none
+
+    // public chat link;
+    a.chat
+      text-decoration: none
+      background: inline-image('pages/im/chat.png') 70% 50% no-repeat
+      display: block
+      height: 28px
+      width: 150px
+      line-height: 28px
+      position: absolute
+      bottom: 20px
+      left: 25%
+
+  img[data-mimic-smile-name][src$='png'] // smiles width;
+    width: 22px
